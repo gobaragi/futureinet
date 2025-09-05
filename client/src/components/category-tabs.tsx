@@ -26,7 +26,7 @@ export function CategoryTabs({ selectedCategory, onCategoryChange, submissionCou
           <Button
             key={hospital.id}
             variant={isSelected ? "default" : "secondary"}
-            className="whitespace-nowrap rounded-full px-6 py-2"
+            className="whitespace-nowrap rounded-full px-3 py-2"
             onClick={() => onCategoryChange(hospital.id)}
             data-testid={`button-category-${hospital.id}`}
           >
