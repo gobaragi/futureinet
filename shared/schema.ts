@@ -11,9 +11,8 @@ export const users = pgTable("users", {
 
 export const fileSubmissions = pgTable("file_submissions", {
   id: varchar("id").primaryKey().default(sql`gen_random_uuid()`),
-  hospital: text("hospital").notNull(),
   content: text("content").notNull(),
-  category: text("category").notNull(),
+  hospital: text("hospital").notNull(),
   fileName: text("file_name"),
   filePath: text("file_path"),
   fileSize: text("file_size"),
@@ -30,9 +29,10 @@ export const insertFileSubmissionSchema = createInsertSchema(fileSubmissions).om
   id: true,
   createdAt: true,
 }).extend({
-  hospital: z.string().min(1, "병원을 선택해주세요"),
+  hospital: z.enum(["안양병원", "구로병원", "안산병원", "기타"], {
+    required_error: "병원을 선택해주세요"
+  }),
   content: z.string().min(1, "내용을 입력해주세요"),
-  category: z.enum(["전체", "안양", "구로", "안산", "기타"]),
   status: z.enum(["pending", "completed", "failed"]).default("pending"),
 });
 

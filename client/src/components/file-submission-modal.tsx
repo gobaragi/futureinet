@@ -18,17 +18,9 @@ interface FileSubmissionModalProps {
 }
 
 const hospitals = [
-  { value: "seoul-national", label: "서울대학교병원" },
-  { value: "samsung", label: "삼성서울병원" },
-  { value: "asan", label: "서울아산병원" },
-  { value: "severance", label: "연세세브란스병원" },
-  { value: "catholic", label: "가톨릭대학교 서울성모병원" },
-];
-
-const categories = [
-  { value: "안양", label: "안양" },
-  { value: "구로", label: "구로" },
-  { value: "안산", label: "안산" },
+  { value: "안양병원", label: "안양병원" },
+  { value: "구로병원", label: "구로병원" },
+  { value: "안산병원", label: "안산병원" },
   { value: "기타", label: "기타" },
 ];
 
@@ -40,9 +32,8 @@ export function FileSubmissionModal({ isOpen, onClose }: FileSubmissionModalProp
   const form = useForm<InsertFileSubmission>({
     resolver: zodResolver(insertFileSubmissionSchema),
     defaultValues: {
-      hospital: "",
+      hospital: "안양병원",
       content: "",
-      category: "안양",
       status: "pending",
     },
   });
@@ -53,7 +44,7 @@ export function FileSubmissionModal({ isOpen, onClose }: FileSubmissionModalProp
       
       // Append form fields
       Object.entries(data).forEach(([key, value]) => {
-        if (key !== "file" && value !== undefined) {
+        if (key !== "file" && value !== undefined && value !== null) {
           formData.append(key, value.toString());
         }
       });
@@ -168,31 +159,6 @@ export function FileSubmissionModal({ isOpen, onClose }: FileSubmissionModalProp
               )}
             />
 
-            {/* Category Selection */}
-            <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>카테고리</FormLabel>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
-                    <FormControl>
-                      <SelectTrigger data-testid="select-category">
-                        <SelectValue />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {categories.map((category) => (
-                        <SelectItem key={category.value} value={category.value}>
-                          {category.label}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
 
             {/* Content */}
             <FormField

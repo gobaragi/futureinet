@@ -15,7 +15,7 @@ export default function Home() {
     queryKey: ["/api/submissions", selectedCategory !== "전체" ? selectedCategory : undefined].filter(Boolean),
     queryFn: ({ queryKey }) => {
       const url = queryKey.length > 1 
-        ? `/api/submissions?category=${encodeURIComponent(queryKey[1] as string)}`
+        ? `/api/submissions?hospital=${encodeURIComponent(queryKey[1] as string)}`
         : "/api/submissions";
       return fetch(url).then(res => res.json());
     }

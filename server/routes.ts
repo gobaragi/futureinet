@@ -38,8 +38,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Get all file submissions with optional category filter
   app.get("/api/submissions", async (req, res) => {
     try {
-      const category = req.query.category as string;
-      const submissions = await storage.getFileSubmissions(category);
+      const hospital = req.query.hospital as string;
+      const submissions = await storage.getFileSubmissions(hospital);
       res.json(submissions);
     } catch (error) {
       console.error("Error fetching submissions:", error);
@@ -142,15 +142,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Get submissions by category
-  app.get("/api/submissions/category/:category", async (req, res) => {
+  // Get submissions by hospital
+  app.get("/api/submissions/hospital/:hospital", async (req, res) => {
     try {
-      const { category } = req.params;
-      const submissions = await storage.getFileSubmissionsByCategory(category);
+      const { hospital } = req.params;
+      const submissions = await storage.getFileSubmissionsByHospital(hospital);
       res.json(submissions);
     } catch (error) {
-      console.error("Error fetching submissions by category:", error);
-      res.status(500).json({ message: "카테고리별 제출물을 가져오는 중 오류가 발생했습니다." });
+      console.error("Error fetching submissions by hospital:", error);
+      res.status(500).json({ message: "병원별 제출물을 가져오는 중 오류가 발생했습니다." });
     }
   });
 

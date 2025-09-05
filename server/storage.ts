@@ -11,7 +11,7 @@ export interface IStorage {
   createFileSubmission(submission: InsertFileSubmission): Promise<FileSubmission>;
   updateFileSubmission(id: string, updates: Partial<FileSubmission>): Promise<FileSubmission | undefined>;
   deleteFileSubmission(id: string): Promise<boolean>;
-  getFileSubmissionsByCategory(category: string): Promise<FileSubmission[]>;
+  getFileSubmissionsByHospital(hospital: string): Promise<FileSubmission[]>;
 }
 
 export class MemStorage implements IStorage {
@@ -40,10 +40,10 @@ export class MemStorage implements IStorage {
     return user;
   }
 
-  async getFileSubmissions(category?: string): Promise<FileSubmission[]> {
+  async getFileSubmissions(hospital?: string): Promise<FileSubmission[]> {
     const submissions = Array.from(this.fileSubmissions.values());
-    if (category && category !== "전체") {
-      return submissions.filter(submission => submission.category === category);
+    if (hospital && hospital !== "전체") {
+      return submissions.filter(submission => submission.hospital === hospital);
     }
     return submissions.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
@@ -58,6 +58,9 @@ export class MemStorage implements IStorage {
       ...insertSubmission,
       id,
       createdAt: new Date(),
+      fileName: insertSubmission.fileName || null,
+      filePath: insertSubmission.filePath || null,
+      fileSize: insertSubmission.fileSize || null,
     };
     this.fileSubmissions.set(id, submission);
     return submission;
@@ -76,9 +79,9 @@ export class MemStorage implements IStorage {
     return this.fileSubmissions.delete(id);
   }
 
-  async getFileSubmissionsByCategory(category: string): Promise<FileSubmission[]> {
+  async getFileSubmissionsByHospital(hospital: string): Promise<FileSubmission[]> {
     return Array.from(this.fileSubmissions.values())
-      .filter(submission => submission.category === category)
+      .filter(submission => submission.hospital === hospital)
       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   }
 }

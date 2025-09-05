@@ -11,11 +11,10 @@ interface FileListProps {
 }
 
 const hospitalNames: Record<string, string> = {
-  "seoul-national": "서울대학교병원",
-  "samsung": "삼성서울병원",
-  "asan": "서울아산병원",
-  "severance": "연세세브란스병원",
-  "catholic": "가톨릭대학교 서울성모병원",
+  "안양병원": "안양병원",
+  "구로병원": "구로병원",
+  "안산병원": "안산병원",
+  "기타": "기타",
 };
 
 const statusConfig = {
@@ -65,9 +64,6 @@ export function FileList({ submissions }: FileListProps) {
                   <div className="flex items-center space-x-4 text-xs text-muted-foreground">
                     <span data-testid={`text-hospital-${submission.id}`}>
                       {hospitalNames[submission.hospital] || submission.hospital}
-                    </span>
-                    <span data-testid={`text-category-${submission.id}`}>
-                      {submission.category}
                     </span>
                     <span data-testid={`text-date-${submission.id}`}>
                       {format(new Date(submission.createdAt), "yyyy.MM.dd HH:mm", { locale: ko })}
