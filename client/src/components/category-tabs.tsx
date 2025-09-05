@@ -31,14 +31,14 @@ export function CategoryTabs({ selectedCategory, onCategoryChange, submissionCou
             data-testid={`button-category-${hospital.id}`}
           >
             {hospital.label}
-            {showCount && hospital.id === selectedCategory && (
-              <span className="ml-1 bg-primary-foreground text-primary rounded-full px-2 py-0.5 text-xs">
-                {submissionCount}
-              </span>
-            )}
             {hospital.id === "전체" && selectedCategory === "전체" && (
               <span className="ml-1 bg-primary-foreground text-primary rounded-full px-2 py-0.5 text-xs">
-                {pendingCount !== undefined ? pendingCount : submissionCount}
+                {pendingCount !== undefined ? pendingCount : 0}
+              </span>
+            )}
+            {showCount && hospital.id === selectedCategory && hospital.id !== "전체" && (
+              <span className="ml-1 bg-primary-foreground text-primary rounded-full px-2 py-0.5 text-xs">
+                {submissionCount}
               </span>
             )}
           </Button>
