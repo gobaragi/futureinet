@@ -22,6 +22,7 @@ export default function Home() {
   });
 
   const submissionCount = submissions?.length || 0;
+  const pendingCount = submissions?.filter(s => s.status === "pending").length || 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -57,6 +58,7 @@ export default function Home() {
             selectedCategory={selectedCategory}
             onCategoryChange={setSelectedCategory}
             submissionCount={submissionCount}
+            pendingCount={pendingCount}
           />
         </div>
 

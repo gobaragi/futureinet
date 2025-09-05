@@ -4,17 +4,18 @@ interface CategoryTabsProps {
   selectedCategory: string;
   onCategoryChange: (hospital: string) => void;
   submissionCount: number;
+  pendingCount?: number;
 }
 
 const hospitals = [
   { id: "전체", label: "전체" },
-  { id: "안양병원", label: "안양병원" },
-  { id: "구로병원", label: "구로병원" },
-  { id: "안산병원", label: "앆산병원" },
+  { id: "안양병원", label: "안암" },
+  { id: "구로병원", label: "구로" },
+  { id: "안산병원", label: "안산" },
   { id: "기타", label: "기타" },
 ];
 
-export function CategoryTabs({ selectedCategory, onCategoryChange, submissionCount }: CategoryTabsProps) {
+export function CategoryTabs({ selectedCategory, onCategoryChange, submissionCount, pendingCount }: CategoryTabsProps) {
   return (
     <div className="flex items-center space-x-2 overflow-x-auto pb-2">
       {hospitals.map((hospital) => {
@@ -37,7 +38,7 @@ export function CategoryTabs({ selectedCategory, onCategoryChange, submissionCou
             )}
             {hospital.id === "전체" && selectedCategory === "전체" && (
               <span className="ml-1 bg-primary-foreground text-primary rounded-full px-2 py-0.5 text-xs">
-                {submissionCount}
+                {pendingCount !== undefined ? pendingCount : submissionCount}
               </span>
             )}
           </Button>
