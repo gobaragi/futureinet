@@ -29,7 +29,7 @@ export const insertFileSubmissionSchema = createInsertSchema(fileSubmissions).om
   id: true,
   createdAt: true,
 }).extend({
-  hospital: z.enum(["안양병원", "구로병원", "안산병원", "기타"], {
+  hospital: z.enum(["안암병원", "구로병원", "안산병원", "기타"], {
     required_error: "병원을 선택해주세요"
   }),
   content: z.string().min(1, "내용을 입력해주세요"),

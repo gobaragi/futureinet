@@ -81,8 +81,8 @@ export default function Home() {
                   <path d="M9 12l2 2l4-4"/>
                 </svg>
               </div>
-              <h3 className="text-2xl font-semibold text-foreground mb-2">미완료 선남내용이 없습니다.</h3>
-              <p className="text-muted-foreground mb-8">선남내용을 등록해보세요.</p>
+              <h3 className="text-2xl font-semibold text-foreground mb-2">미완료 선납내용이 없습니다.</h3>
+              <p className="text-muted-foreground mb-8">선납내용을 등록해보세요.</p>
             </div>
           )}
         </div>

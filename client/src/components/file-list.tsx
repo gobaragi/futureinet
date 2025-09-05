@@ -11,7 +11,7 @@ interface FileListProps {
 }
 
 const hospitalNames: Record<string, string> = {
-  "안양병원": "안양병원",
+  "안암병원": "안암병원",
   "구로병원": "구로병원",
   "안산병원": "안산병원",
   "기타": "기타",

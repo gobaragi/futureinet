@@ -9,7 +9,7 @@ interface CategoryTabsProps {
 
 const hospitals = [
   { id: "전체", label: "전체" },
-  { id: "안양병원", label: "안암" },
+  { id: "안암병원", label: "안암" },
   { id: "구로병원", label: "구로" },
   { id: "안산병원", label: "안산" },
   { id: "기타", label: "기타" },

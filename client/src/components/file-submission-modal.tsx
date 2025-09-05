@@ -18,7 +18,7 @@ interface FileSubmissionModalProps {
 }
 
 const hospitals = [
-  { value: "안양병원", label: "안양병원" },
+  { value: "안암병원", label: "안암병원" },
   { value: "구로병원", label: "구로병원" },
   { value: "안산병원", label: "안산병원" },
   { value: "기타", label: "기타" },
@@ -32,7 +32,7 @@ export function FileSubmissionModal({ isOpen, onClose }: FileSubmissionModalProp
   const form = useForm<InsertFileSubmission>({
     resolver: zodResolver(insertFileSubmissionSchema),
     defaultValues: {
-      hospital: "안양병원",
+      hospital: "안암병원",
       content: "",
       status: "pending",
     },
@@ -60,7 +60,7 @@ export function FileSubmissionModal({ isOpen, onClose }: FileSubmissionModalProp
     onSuccess: () => {
       toast({
         title: "성공",
-        description: "선남 내용이 성공적으로 등록되었습니다.",
+        description: "선납 내용이 성공적으로 등록되었습니다.",
       });
       queryClient.invalidateQueries({ queryKey: ["/api/submissions"] });
       onClose();
@@ -171,7 +171,7 @@ export function FileSubmissionModal({ isOpen, onClose }: FileSubmissionModalProp
                     <Textarea
                       {...field}
                       rows={4}
-                      placeholder="오늘의 선남 내용을 입력하세요..."
+                      placeholder="오늘의 선납 내용을 입력하세요..."
                       className="resize-none"
                       data-testid="textarea-content"
                     />
